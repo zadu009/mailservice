@@ -1,0 +1,19 @@
+       <!doctype html>
+       <html lang="en">
+       <head>
+           <meta charset="UTF-8">
+           <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+           <meta http-equiv="X-UA-Compatible" content="ie=edge">
+           <title>Ihre Bestellung bei E-Handel-Vapes</title>
+       </head>
+       <body>
+       <div style="margin-top: 10px">Greetings, ${emailDetails.recipient}</div>
+       <div>Sehr geehrter Kunde <b>${emailDetails.recipient}</b></div>
+       <br/>
+       <div> Ihre Bestellung:</div>
+       <#list emailDetails.orders as order>
+         <p>${order.name} ${order.salePrice}€ Anzahl:${order.quantity}
+       </#list>
+       <div> Vielen Dank für Ihren Einkauf!</div>
+       </body>
+       </html>

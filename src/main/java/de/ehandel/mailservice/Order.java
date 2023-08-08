@@ -16,9 +16,11 @@ import lombok.NoArgsConstructor;
 public class Order {
 
     // Class data members
+    private String id;
     private String name;
     private double price;
-    private double salePrice;
-    private String thumbnail;
     private double quantity;
+    private double salePrice;
+    private String slug;
+    private String thumbnail;
 }

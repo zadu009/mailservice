@@ -7,6 +7,7 @@ package de.ehandel.mailservice;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import freemarker.template.TemplateException;
 import jakarta.mail.MessagingException;
 
 import jakarta.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -34,6 +37,8 @@ public class EmailServiceImpl implements EmailService {
     @Value("${spring.mail.username}") private String sender;
 
     final Configuration configuration;
+
+    Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
     public EmailServiceImpl(Configuration configuration, JavaMailSender javaMailSender) {
         this.configuration = configuration;
@@ -56,6 +61,7 @@ public class EmailServiceImpl implements EmailService {
             String emailContent = getEmailContent(details);
             helper.setText(emailContent, true);
             javaMailSender.send(mimeMessage);
+            logger.info("Versende Email an: "+ details.getRecipient());
             return "Mail Sent Successfully...";
         }
 

@@ -55,11 +55,14 @@ public class EmailServiceImpl implements EmailService {
         try {
 
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setSubject("Vielen Dank für Ihren Einkauf");
             helper.setTo(details.getRecipient());
             String emailContent = getEmailContent(details);
             helper.setText(emailContent, true);
+            File imageFile = new File(getClass().getClassLoader().getResource("templates/images/favicon.png").getFile());
+            FileSystemResource res = new FileSystemResource(imageFile);
+            helper.addInline("identifier1234", res);
             javaMailSender.send(mimeMessage);
             logger.info("Versende Email an: "+ details.getRecipient());
             return "Mail Sent Successfully...";

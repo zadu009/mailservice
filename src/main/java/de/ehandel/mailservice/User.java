@@ -7,21 +7,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 // Annotations
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 // Class
-public class EmailDetails {
+public class User {
 
     // Class data members
-    private String recipient;
-    private String msgBody;
-    private String subject;
-    private String attachment;
-    private List<Order> orders;
-    private User user;
+    private String firstname;
+    private String name;
+    private String street;
+    private String streetnumber;
+    private String zipcode;
+    private String country;
+    private String city;
 }

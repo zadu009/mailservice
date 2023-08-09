@@ -25,6 +25,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 // Annotation
 @Service
@@ -80,6 +81,13 @@ public class EmailServiceImpl implements EmailService {
         StringWriter stringWriter = new StringWriter();
         Map<String, Object> model = new HashMap<>();
         model.put("emailDetails", emailDetails);
+        if(!CollectionUtils.isEmpty(emailDetails.getOrders())){
+            double sum=0;
+            for(Order order : emailDetails.getOrders()){
+                sum=sum + order.getSalePrice() * order.getQuantity();
+            }
+            emailDetails.setCheckoutprice(sum);
+        }
         configuration.getTemplate("email.ftlh").process(model, stringWriter);
         return stringWriter.getBuffer().toString();
     }

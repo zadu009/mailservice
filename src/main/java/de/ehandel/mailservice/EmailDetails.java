@@ -24,4 +24,5 @@ public class EmailDetails {
     private String attachment;
     private List<Order> orders;
     private User user;
+    private double checkoutprice;
 }

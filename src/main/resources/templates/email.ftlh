@@ -241,7 +241,7 @@
                                           <tr>
                                              <td class="pad">
                                                 <div align="center" style="font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;">
-                                                   <div class="our-class">Gesamt 30€ </div>
+                                                   <div class="our-class">Gesamt ${emailDetails.checkoutprice}€ </div>
                                                 </div>
                                              </td>
                                           </tr>

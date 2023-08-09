@@ -60,9 +60,9 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(details.getRecipient());
             String emailContent = getEmailContent(details);
             helper.setText(emailContent, true);
-            File imageFile = new File(getClass().getClassLoader().getResource("templates/images/favicon.png").getFile());
-            FileSystemResource res = new FileSystemResource(imageFile);
-            helper.addInline("identifier1234", res);
+            //File imageFile = new File(getClass().getClassLoader().getResource("templates/images/favicon.png").getFile());
+            //FileSystemResource res = new FileSystemResource(imageFile);
+            //helper.addInline("identifier1234", res);
             javaMailSender.send(mimeMessage);
             logger.info("Versende Email an: "+ details.getRecipient());
             return "Mail Sent Successfully...";

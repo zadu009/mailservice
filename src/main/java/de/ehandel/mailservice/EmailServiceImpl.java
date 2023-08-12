@@ -85,8 +85,8 @@ public class EmailServiceImpl implements EmailService {
             double sum=0;
             for(Order order : emailDetails.getOrders()){
                 sum=sum + order.getSalePrice() * order.getQuantity();
-                sum = Math.round(order.getSalePrice() * 100) / 100;
             }
+
             emailDetails.setCheckoutprice(sum);
         }
         configuration.getTemplate("email.ftlh").process(model, stringWriter);

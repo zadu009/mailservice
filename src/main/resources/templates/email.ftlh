@@ -122,7 +122,7 @@
                                        <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                                           <tr>
                                              <td class="pad" style="text-align:center;width:100%;">
-                                                <h1 style="margin: 0; color: #555555; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 23px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Hallo ${emailDetails.user.firstname}! Vielen Dank für deinen Einkauf bei E-Handel</span></h1>
+                                                <h1 style="margin: 0; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 23px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Hallo ${emailDetails.user.firstname}! Vielen Dank für deinen Einkauf bei E-Handel</span></h1>
                                              </td>
                                           </tr>
                                        </table>
@@ -145,7 +145,7 @@
                                        <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                                           <tr>
                                              <td class="pad" style="text-align:left;width:100%;">
-                                                <h1 style="margin: 0; color: #555555; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Bestellübersicht</span></h1>
+                                                <h1 style="margin: 0; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Bestellübersicht</span></h1>
                                              </td>
                                           </tr>
                                        </table>
@@ -200,24 +200,18 @@
                                                 <div align="center" style="font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:center;">
                                                    <#list emailDetails.orders as order>
                                                    </#list></div>
-                                                <table>
-                                                   <thead>
-                                                      <tr>
-                                                         <th>Produkt</th>
-                                                         <th>Preis</th>
-                                                         <th>Anzahl</th>
-                                                      </tr>
-                                                   </thead>
-                                                   <tbody>
-                                                      <#list emailDetails.orders as order>
-                                                      <tr>
-                                                         <td>${order.name}</td>
-                                                         <td>${order.salePrice}€</td>
-                                                         <td>${order.quantity}</td>
-                                                      </tr>
-                                                      </#list>
-                                                   </tbody>
-                                                </table>
+												   <#list emailDetails.orders as order>
+												   					<img
+						src="https://ehandelpb.fly.dev/api/files/products/${order.id}/${order.thumbnail}"
+						width="92"
+						height="92"
+						alt="{cartItem.name} thumbnail"
+					/>
+                                                         <p>${order.name}</p>
+                                                         <p>Preis: ${order.salePrice}€</p>
+                                                         <p>Anzahl: ${order.quantity}</p>
+													   <br></br>
+                                                   </#list>
                                              </td>
                                           </tr>
                                        </table>
@@ -236,12 +230,13 @@
                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000; width: 500px; margin: 0 auto;" width="500">
                               <tbody>
                                  <tr>
-                                    <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                                    <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
                                        <table border="0" cellpadding="0" cellspacing="0" class="html_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                                           <tr>
                                              <td class="pad">
                                                 <div align="center" style="font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;">
                                                    <div class="our-class">Gesamt ${emailDetails.checkoutprice}€ </div>
+												   <p style="font-size:11px">*Steuern inbegriffen </p>
                                                 </div>
                                              </td>
                                           </tr>
@@ -369,6 +364,7 @@
                      </tr>
                   </tbody>
                </table>
+			   <a href="https://ehandel.vercel.app/shop/all"><h2>Shop	</h2></a><a href="https://ehandel.vercel.app/kontakt"><h2>Kontakt	</h2></a><a href="https://ehandel.vercel.app/impressum"><h2>Impressum	</h2></a>
                <!-- End -->
    </body>
 </html>

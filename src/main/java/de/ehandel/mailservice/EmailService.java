@@ -10,4 +10,6 @@ public interface EmailService {
     // To send a simple email
     String sendSimpleMail(EmailDetails details);
 
+    String sendFinalEmail(EmailDetails details);
+
 }

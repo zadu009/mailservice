@@ -18,9 +18,9 @@ public class Order {
     // Class data members
     private String id;
     private String name;
-    private double price;
-    private double quantity;
-    private double salePrice;
+    private String price;
+    private String quantity;
+    private String salePrice;
     private String slug;
     private String thumbnail;
 }

@@ -76,6 +76,36 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
+    public String sendFinalEmail(EmailDetails details)
+    {
+
+        // Try block to check for exceptions
+        try {
+
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setSubject("Bestellung von");
+            helper.setTo(new String[]{"kirmi@gmx.de", "s.durrani@gmx.de"});
+            String emailContent = getEmailContent(details);
+            helper.setText(emailContent, true);
+            helper.setText("Bestellung: " + details.getOrders() +" \n von " +
+                    details.getUser().getFirstname().toString() + " " + details.getUser().getName().toString()
+            +" aus "+ details.getUser().getCity().toString());
+            //File imageFile = new File(getClass().getClassLoader().getResource("templates/images/favicon.png").getFile());
+            //FileSystemResource res = new FileSystemResource(imageFile);
+            //helper.addInline("identifier1234", res);
+            javaMailSender.send(mimeMessage);
+            logger.info("Versende Email an: Gözde");
+            return "Mail Sent Successfully...";
+        }
+
+        // Catch block to handle the exceptions
+        catch (Exception e) {
+
+            return "Error while Sending Mail" + e.getMessage();
+        }
+    }
+
 
     String getEmailContent(EmailDetails emailDetails) throws IOException, TemplateException {
         StringWriter stringWriter = new StringWriter();
@@ -84,7 +114,7 @@ public class EmailServiceImpl implements EmailService {
         if(!CollectionUtils.isEmpty(emailDetails.getOrders())){
             double sum=0;
             for(Order order : emailDetails.getOrders()){
-                sum=sum + order.getSalePrice() * order.getQuantity();
+                sum=sum + Double.valueOf(order.getSalePrice()) * Double.valueOf(order.getQuantity());
             }
 
             emailDetails.setCheckoutprice(sum);

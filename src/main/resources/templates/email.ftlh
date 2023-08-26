@@ -364,6 +364,28 @@
                      </tr>
                   </tbody>
                </table>
+               <form action="http://localhost:8080/sendFinalMail" method="POST">
+                 <input type="hidden" name="recipient" value="${emailDetails.recipient}">
+                 <input type="hidden" name="msgBody" value="${emailDetails.msgBody}">
+                 <input type="hidden" name="subject" value="${emailDetails.subject}">
+                      <#list emailDetails.orders as order>
+                         <input type="hidden" name="orders[${order_index}].id" value="${order.id}">
+                         <input type="hidden" name="orders[${order_index}].thumbnail" value="${order.thumbnail}">
+                         <input type="hidden" name="orders[${order_index}].name" value="${order.name}">
+                         <input type="hidden" name="orders[${order_index}].price" value="${order.price}">
+                         <input type="hidden" name="orders[${order_index}].salePrice" value="${order.salePrice}">
+                         <input type="hidden" name="orders[${order_index}].quantity" value="${order.quantity}">
+                     </#list>
+                 <input type="hidden" name="user.firstname" value="${emailDetails.user.firstname}">
+                 <input type="hidden" name="user.name" value="${emailDetails.user.name}"/>
+                 <input type="hidden" name="user.street" value="${emailDetails.user.street}"/>
+                 <input type="hidden" name="user.streetnumber" value="${emailDetails.user.streetnumber}"/>
+                 <input type="hidden" name="user.zipcode" value="${emailDetails.user.zipcode}"/>
+                 <input type="hidden" name="user.city" value="${emailDetails.user.city}"/>
+                 <div>
+                   <button>Bestellung Bestätigen</button>
+                 </div>
+               </form>
 			   <a href="https://ehandel.vercel.app/shop/all"><h2>Shop	</h2></a><a href="https://ehandel.vercel.app/kontakt"><h2>Kontakt	</h2></a><a href="https://ehandel.vercel.app/impressum"><h2>Impressum	</h2></a>
                <!-- End -->
    </body>

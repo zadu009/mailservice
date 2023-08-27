@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.time.Clock;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import freemarker.template.Configuration;
@@ -88,9 +89,18 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(new String[]{"kirmi@gmx.de", "s.durrani@gmx.de"});
             String emailContent = getEmailContent(details);
             helper.setText(emailContent, true);
-            helper.setText("Bestellung: " + details.getOrders() +" \n von " +
+            StringBuilder result = new StringBuilder();
+
+            for(Order order: details.getOrders())
+            {
+                result.append(", Produktname: ").append(order.getName())
+                        .append(", Preis: ").append(order.getPrice())
+                        .append(", Anzahl: ").append(order.getQuantity())
+                        .append("\n");
+            }
+            helper.setText(result +" \n von " +
                     details.getUser().getFirstname().toString() + " " + details.getUser().getName().toString()
-            +" aus "+ details.getUser().getCity().toString());
+            +" aus "+ details.getUser().getCity().toString() + "\n Gesamtpreis: " + details.getCheckoutprice());
             //File imageFile = new File(getClass().getClassLoader().getResource("templates/images/favicon.png").getFile());
             //FileSystemResource res = new FileSystemResource(imageFile);
             //helper.addInline("identifier1234", res);

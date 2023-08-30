@@ -41,6 +41,7 @@ public class EmailServiceImpl implements EmailService {
     final Configuration configuration;
 
     Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
+    private double gesamtPreis;
 
     public EmailServiceImpl(Configuration configuration, JavaMailSender javaMailSender) {
         this.configuration = configuration;
@@ -99,8 +100,8 @@ public class EmailServiceImpl implements EmailService {
                         .append("\n");
             }
             helper.setText(result +" \n von " +
-                    details.getUser().getFirstname().toString() + " " + details.getUser().getName().toString()
-            +" aus "+ details.getUser().getCity().toString() + "\n Gesamtpreis: " + details.getCheckoutprice());
+                    details.getFullname() + " "
+            +" telefon: "+ details.getTelefonnummer() + "\n Gesamtpreis: " + gesamtPreis);
             //File imageFile = new File(getClass().getClassLoader().getResource("templates/images/favicon.png").getFile());
             //FileSystemResource res = new FileSystemResource(imageFile);
             //helper.addInline("identifier1234", res);
@@ -127,7 +128,7 @@ public class EmailServiceImpl implements EmailService {
                 sum=sum + Double.valueOf(order.getSalePrice()) * Double.valueOf(order.getQuantity());
             }
 
-            emailDetails.setCheckoutprice(sum);
+            gesamtPreis = sum;
         }
         configuration.getTemplate("email.ftlh").process(model, stringWriter);
         return stringWriter.getBuffer().toString();

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 // Annotations
 @Data
 @AllArgsConstructor
@@ -18,9 +20,12 @@ public class Order {
     // Class data members
     private String id;
     private String name;
-    private String price;
-    private String quantity;
-    private String salePrice;
-    private String slug;
     private String thumbnail;
+    private int price;
+    private int salePrice;
+    private int quantity;
+    private List<String> extras;
+    private List<String> sossen;
+    private String speziell;
+    private List<PizzaExtra> pizzaextras;
 }

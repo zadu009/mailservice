@@ -24,7 +24,7 @@ public class EmailController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @PostMapping("/sendFinalMail")
-    public String sendFinalMail(@ModelAttribute("emailDetails") EmailDetails emailDetails) {
+    public String sendFinalMail(@RequestBody EmailDetails emailDetails) {
 
 
             //JsonNode jsonNode = objectMapper.readTree(stringDetails);
